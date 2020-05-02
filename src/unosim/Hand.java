@@ -18,11 +18,4 @@ public class Hand extends Deck {
 		return this.deck.remove(index);
 	}
 	
-	public boolean isEmpty() {
-		if (this.deck.isEmpty()) {
-			return true;
-		}
-		return false;
-	}
-	
 }

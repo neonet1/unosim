@@ -23,5 +23,4 @@ public class Discard extends Deck{
 		this.deck.clear();
 	}
 	
-	
 }

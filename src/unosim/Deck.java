@@ -29,8 +29,8 @@ public class Deck {
 				}
 			}
 		}
-		//for wilds
-		for (int symbol = 14; symbol < 17; symbol++) {
+		//for regular wild and +4
+		for (int symbol = 14; symbol < 16; symbol++) {
 			//add the card with symbol and 4 color x number of times
 			//x = (4 * 13) + symbol
 			//System.out.println(14 * 4 + symbol - 14); an offset is used
@@ -39,6 +39,14 @@ public class Deck {
 				//System.out.println("pushed");
 			}
 		}
+		//for 2 wild
+		for (int i = 0; i < config[(14 * 4 + 17 - 14)]; i++) {
+			deck.push(new Card(2, 4));
+		}
+	}
+	
+	public void fillDeck(Deck d) {
+		this.deck = d.getList();
 	}
 	
 	public LinkedList<Card> getList() {
@@ -47,6 +55,10 @@ public class Deck {
 	
 	public void shuffle() {
 		Collections.shuffle(this.deck);
+	}
+	
+	public boolean isEmpty() {
+		return this.deck.isEmpty();
 	}
 	
 	public static void main(String[] args) {

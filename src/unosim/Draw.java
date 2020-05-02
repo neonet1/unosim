@@ -17,8 +17,4 @@ public class Draw extends Deck {
 		shuffle();
 	}
 	
-	public boolean isEmpty() {
-		return deck.isEmpty();
-	}
-	
 }
