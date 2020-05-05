@@ -1,19 +1,27 @@
 package unosim;
-import java.util.LinkedList;
+import java.util.ArrayList;
+
+//this needs to be overhauled after the engine is implemented
+//Do I hardcode actions here as methods? seems so.
+//I can make an actions class perhaps to generalize a bit
+//Card actions: reverse, skip, draw 2 and draw 4.
+//Turn actions: draw, play, pass
+//pass and skip are the same:
+//pass ends your turn, skip ends the next player's turn
+//draw and the draw cards are the same:
+//draw gets you one card, draw 2/4 gets the next player 2/4 cards.
+//(draw also has a skip effect in the normal UNO ruleset)
+//Base Actions: Draw, Skip, Play, Reverse, Swap
 
 public class Field {
 	
-	//config is just an array
-	//the configuration table is available in the readme
-	private Integer[][] fieldConfig = new Integer[2][59];
+	
 	private Deck cardProfile = new Deck();
 	private Discard discardPile = new Discard();
 	private Draw drawPile = new Draw();
-	private LinkedList<Hand> playerHands = new LinkedList<Hand>();
+	private ArrayList<Hand> playerHands = new ArrayList<Hand>();
 	
-	public Field(Integer[][] configurations) {
-		this.fieldConfig = configurations;
-		cardProfile.fillDeck(fieldConfig[0]);
+	public Field() {
 	}
 	
 	public void setup() {

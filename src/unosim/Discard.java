@@ -6,6 +6,11 @@ public class Discard extends Deck{
 	
 	public Discard() {}
 	
+	public void discard(Card c) {
+		this.deck.push(c);
+	}
+	
+	/*
 	public boolean discard(Card c) {
 		//boolean to confirm the insertion occurred
 		Card top = this.deck.peek();
@@ -18,6 +23,7 @@ public class Discard extends Deck{
 			return false;
 		}
 	}
+	*/
 	
 	public void clear() {
 		this.deck.clear();

@@ -4,18 +4,16 @@ import java.util.Collections;
 
 public class Deck {
 	
-	
 	LinkedList<Card> deck = new LinkedList<Card>();
-	
-	//THERE ARE 59 DISTINCT CARD TYPES
 	
 	public Deck() {}
 	
 	//this constructor is a multiplicity config to deck number function
-	public Deck(Integer[] config) {
-		fillDeck(config);
-	}
+	//public Deck() {
+		//fillDeck(config);
+	//}
 	
+	/*
 	public void fillDeck(Integer[] config) {
 		//for regulars (number and action)
 		for (int color = 0; color < 4; color++) {
@@ -44,13 +42,13 @@ public class Deck {
 			deck.push(new Card(2, 4));
 		}
 	}
+	*/
+	public LinkedList<Card> getList() {
+		return this.deck;
+	}
 	
 	public void fillDeck(Deck d) {
 		this.deck = d.getList();
-	}
-	
-	public LinkedList<Card> getList() {
-		return this.deck;
 	}
 	
 	public void shuffle() {
@@ -59,18 +57,6 @@ public class Deck {
 	
 	public boolean isEmpty() {
 		return this.deck.isEmpty();
-	}
-	
-	public static void main(String[] args) {
-		Integer[] testconfig = new Integer[59]; //59 card types
-		for (int i = 0; i < 59; i++) {
-			testconfig[i] = 1+ i % 4; //a test multiplicity assignment
-		}
-		Deck d = new Deck(testconfig);
-		d.shuffle();
-		for (Card c : d.getList()) {
-			c.printCard();
-		}
 	}
 	
 }

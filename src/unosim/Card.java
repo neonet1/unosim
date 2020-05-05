@@ -1,92 +1,53 @@
 package unosim;
+import java.util.LinkedList;
 
 public class Card {
+	
+	//dont know if to make card persistence or deck persistence
+	private boolean isPersistent = false;
+	
+	//can be generalized with array later
+	private LinkedList<Type> type1 = new LinkedList<Type>();
+	private LinkedList<Type> type2 = new LinkedList<Type>();
 
-	private int symbol;
-	private int color;
 	
-	public Card(int s, int c) {
-		this.symbol = s;
-		this.color = c;
+	public Card(Type A, Type B) {
+		type1.push(A);
+		type2.push(B);
 	}
 	
-	public int getSymbol() {
-		return this.symbol;
+	public Card(Type A, Type B, boolean p) {
+		type1.push(A);
+		type2.push(B);
+		isPersistent = p;
 	}
 	
-	public int getColor() {
-		return this.color;	
-	}
-	
-	public Card changeColor(int newColor) {
-		return new Card(this.symbol, newColor);
-	}
-	
-	public Card changeSymbol(int newSymbol ) {
-		return new Card(newSymbol, this.color);
-	}
-	
-	//accepts gui player input to evaluate wild
-	public Card evalWild(int playerColor) {
-		return changeColor(playerColor);
-	}
-	
-	//accepts gui player input to evaluate #
-	public Card evalSharp(int playerNumber) {
-		return changeSymbol(playerNumber);
-	}
-	
-	public boolean matchesNumber(Card c) {
-		//if simple match or chosen is #
-		if ((c.getSymbol() <= 9 && c.getSymbol() == this.symbol) || (c.getSymbol() == 13 && this.symbol <= 9)) {
-			return true;
+	//changes a card's active (top) type to a subtype of its current active type
+	//int parameter to choose between type slots (can be generalized later)
+	public void evaluate(int typeNumber, int subIndex) {
+		if(typeNumber == 0) {
+			type1.push(type1.peek().evaluate(subIndex));
 		}
-		return false;
+		else {
+			type2.push(type2.peek().evaluate(subIndex));
+		}
 	}
 	
-	public boolean matchesNumber(Card c1, Card c2) {
-		if (this.matchesNumber(c1) && this.matchesNumber(c2)) {
-			return true;
-		}
-		return false;
-	}
 	
-	public boolean matchesColor(Card c) {
-		if (this.color == c.getColor() || this.color == 4) {
-			return true;
+	//restores a card to its original types
+	//can be generalized later
+	public void restore() {
+		for (int i = 1; i < type1.size(); i++) {
+			type1.pop();
 		}
-		return false;
-	}
-	
-	public boolean matchesColor(Card c1, Card c2) {
-		if (this.matchesColor(c1) && this.matchesColor(c2)) {
-			return true;
+		for (int i = 1; i < type2.size(); i++) {
+			type2.pop();
 		}
-		return false;
-	}
-	
-	public boolean matchesSymbol(Card c) {
-		if (c.getSymbol() == this.symbol || this.matchesNumber(c)) {
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean connectsTo(Card t) {
-		//Implicit parameter is the top card
-		//Explicit parameter (argument) is the chosen card
-		//this follows the useful matches convention
-		//simple connectivity (like onto like)
-		if (this.matchesSymbol(t) || this.matchesColor(t)) {
-			return true;
-		}
-		//No connectivity
-		return false;
 	}
 	
 	public void printCard() {
-		System.out.println("Symbol: " + symbol);
-		System.out.println("Color: " + color);
+		System.out.println("Type1: " + type1.peek().getName());
+		System.out.println("Type2: " + type2.peek().getName());
 		System.out.println();
 	}
 	
