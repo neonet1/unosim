@@ -1,0 +1,10 @@
+
+
+An action can be initialized by a player or imposed by an action card. 
+Can we "embed" actions into both cards and selection screens?
+Discarding a card and pressing a button would both activate "actions".
+There would be different classes of actions.
+A very straightfoward one would be draw. Draw happens in one's turn, and in action cards.
+
+Regular UNO adds a skip effect to the action card's draw action, but that can be severed
+when generalizing.
